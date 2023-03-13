@@ -17,3 +17,19 @@ build-site-1: ## Build Configs
 .PHONY: deploy-site-1
 deploy-site-1: ## Deploy Configs via eAPI
 	ansible-playbook playbooks/deploy.yml -i sites/site_1/inventory.yml -e "target_hosts=SITE1_FABRIC"
+
+########################################################
+# Site 1
+########################################################
+
+.PHONY: ping-site-2
+ping-site-2: ## Ping Nodes 
+	ansible-playbook playbooks/ping.yml -i sites/site_2/inventory.yml -e "target_hosts=SITE2_FABRIC"
+
+.PHONY: build-site-2
+build-site-2: ## Build Configs 
+	ansible-playbook playbooks/build.yml -i sites/site_2/inventory.yml -e "target_hosts=SITE2_FABRIC"
+
+.PHONY: deploy-site-2
+deploy-site-2: ## Deploy Configs via eAPI
+	ansible-playbook playbooks/deploy.yml -i sites/site_2/inventory.yml -e "target_hosts=SITE2_FABRIC"

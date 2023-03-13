@@ -40,7 +40,7 @@ leaf:
     RACK1:
       mlag: true
       filter:
-        tags: [ "10" ]
+        tags: [ "30" ]
       nodes:
         s2-leaf1:
           id: 3
@@ -53,7 +53,7 @@ leaf:
     RACK2:
       mlag: true
       filter:
-        tags: [ "20" ]
+        tags: [ "40" ]
       nodes:
         s2-leaf3:
           id: 5
