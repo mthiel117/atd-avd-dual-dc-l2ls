@@ -1,6 +1,6 @@
 ---
 - name: Deploy Switch configuration
-  hosts: ATD_FABRIC
+  hosts: SITE1_FABRIC
   gather_facts: false
   tasks:
 
