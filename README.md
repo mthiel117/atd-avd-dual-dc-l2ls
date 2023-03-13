@@ -75,7 +75,7 @@ make deploy-site-1
 make deploy-site-2
 ```
 
-# Test Traffic
+## Test Traffic
 
 Log on to a a spine a look at OSPF neighbors and ip routes.  Ping across to the the side.
 
