@@ -47,10 +47,10 @@ make prepwan
 
 >Note: Needs work to make this easier...  Eliminate the need to manually gen sha512 password and populate Lab password across multiple files...
 
-- sites/site_2/group_vars/SITE2.yml
-- sites/site_2/group_vars/SITE2.yml
-- wan_configs/group_vars/WAN.yml
-- global_vars/global_dc_vars.yml
+- sites/site_2/group_vars/SITE2.yml (line 4)
+- sites/site_2/group_vars/SITE2.yml (line 4)
+- wan_configs/group_vars/WAN.yml (line 4)
+- global_vars/global_dc_vars.yml (line 34-35)
 
 ## Build Site Configs
 
