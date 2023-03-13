@@ -2,6 +2,16 @@
 
 ## ATD Topology
 
+Site 1
+
+- vlan 10, 10.10.10.0/24
+- vlan 20, 10.20.20.0/24
+
+Site 2
+
+- vlan 30, 10.30.30.0/24
+- vlan 40, 10.40.40.0/24
+
 ![ATD L2LS Topo](images/atd-avd-dual-dc-l2ls-topo.png)
 
 ## Initialize WAN environment
