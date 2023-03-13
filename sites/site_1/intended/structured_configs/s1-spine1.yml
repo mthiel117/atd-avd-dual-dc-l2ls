@@ -59,13 +59,13 @@ vlan_interfaces:
     description: MLAG_PEER_L3_PEERING
     shutdown: false
     mtu: 1500
-    ip_address: 10.1.1.0/31
+    ip_address: 10.1.2.0/31
     ospf_network_point_to_point: true
     ospf_area: 0.0.0.0
   Vlan4094:
     description: MLAG_PEER
     shutdown: false
-    ip_address: 10.0.0.0/31
+    ip_address: 10.1.1.0/31
     no_autostate: true
     mtu: 1500
   Vlan10:
@@ -196,7 +196,7 @@ ethernet_interfaces:
 mlag_configuration:
   domain_id: SPINES
   local_interface: Vlan4094
-  peer_address: 10.0.0.1
+  peer_address: 10.1.1.1
   peer_link: Port-Channel1
   reload_delay_mlag: 300
   reload_delay_non_mlag: 330

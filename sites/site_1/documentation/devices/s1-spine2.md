@@ -150,7 +150,7 @@ username arista ssh-key ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDrkPzA+FPLOkMeQaWn
 
 | Domain-id | Local-interface | Peer-address | Peer-link |
 | --------- | --------------- | ------------ | --------- |
-| SPINES | Vlan4094 | 10.0.0.0 | Port-Channel1 |
+| SPINES | Vlan4094 | 10.1.1.0 | Port-Channel1 |
 
 Dual primary detection is disabled.
 
@@ -161,7 +161,7 @@ Dual primary detection is disabled.
 mlag configuration
    domain-id SPINES
    local-interface Vlan4094
-   peer-address 10.0.0.0
+   peer-address 10.1.1.0
    peer-link Port-Channel1
    reload-delay mlag 300
    reload-delay non-mlag 330
@@ -403,8 +403,8 @@ interface Loopback0
 | --------- | --- | ---------- | ------------------ | ------------------------- | ---- | ------ | ------- |
 | Vlan10 |  default  |  10.10.10.3/24  |  -  |  10.10.10.1  |  -  |  -  |  -  |
 | Vlan20 |  default  |  10.20.20.3/24  |  -  |  10.20.20.1  |  -  |  -  |  -  |
-| Vlan4093 |  default  |  10.1.1.1/31  |  -  |  -  |  -  |  -  |  -  |
-| Vlan4094 |  default  |  10.0.0.1/31  |  -  |  -  |  -  |  -  |  -  |
+| Vlan4093 |  default  |  10.1.2.1/31  |  -  |  -  |  -  |  -  |  -  |
+| Vlan4094 |  default  |  10.1.1.1/31  |  -  |  -  |  -  |  -  |  -  |
 
 ### VLAN Interfaces Device Configuration
 
@@ -426,7 +426,7 @@ interface Vlan4093
    description MLAG_PEER_L3_PEERING
    no shutdown
    mtu 1500
-   ip address 10.1.1.1/31
+   ip address 10.1.2.1/31
    ip ospf network point-to-point
    ip ospf area 0.0.0.0
 !
@@ -435,7 +435,7 @@ interface Vlan4094
    no shutdown
    mtu 1500
    no autostate
-   ip address 10.0.0.1/31
+   ip address 10.1.1.1/31
 ```
 
 # Routing

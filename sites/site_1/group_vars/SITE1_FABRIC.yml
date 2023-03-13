@@ -12,8 +12,8 @@ l3spine:
     spanning_tree_mode: mstp
     spanning_tree_priority: 4096
     loopback_ipv4_pool: 1.1.1.0/24
-    mlag_peer_ipv4_pool: 10.0.0.0/24
-    mlag_peer_l3_ipv4_pool: 10.1.1.0/24
+    mlag_peer_ipv4_pool: 10.1.1.0/24
+    mlag_peer_l3_ipv4_pool: 10.1.2.0/24
     virtual_router_mac_address: aa:aa:bb:bb:cc:cc
     mlag_interfaces: [Ethernet1, Ethernet6]
   node_groups:

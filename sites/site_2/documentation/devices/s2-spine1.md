@@ -150,7 +150,7 @@ username arista ssh-key ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDrkPzA+FPLOkMeQaWn
 
 | Domain-id | Local-interface | Peer-address | Peer-link |
 | --------- | --------------- | ------------ | --------- |
-| SPINES | Vlan4094 | 10.0.0.1 | Port-Channel1 |
+| SPINES | Vlan4094 | 10.2.1.1 | Port-Channel1 |
 
 Dual primary detection is disabled.
 
@@ -161,7 +161,7 @@ Dual primary detection is disabled.
 mlag configuration
    domain-id SPINES
    local-interface Vlan4094
-   peer-address 10.0.0.1
+   peer-address 10.2.1.1
    peer-link Port-Channel1
    reload-delay mlag 300
    reload-delay non-mlag 330
@@ -366,7 +366,7 @@ interface Port-Channel4
 
 | Interface | Description | VRF | IP Address |
 | --------- | ----------- | --- | ---------- |
-| Loopback0 | Router_ID | default | 1.1.1.1/32 |
+| Loopback0 | Router_ID | default | 2.2.2.1/32 |
 
 #### IPv6
 
@@ -382,7 +382,7 @@ interface Port-Channel4
 interface Loopback0
    description Router_ID
    no shutdown
-   ip address 1.1.1.1/32
+   ip address 2.2.2.1/32
    ip ospf area 0.0.0.0
 ```
 
@@ -403,8 +403,8 @@ interface Loopback0
 | --------- | --- | ---------- | ------------------ | ------------------------- | ---- | ------ | ------- |
 | Vlan30 |  default  |  10.30.30.2/24  |  -  |  10.30.30.1  |  -  |  -  |  -  |
 | Vlan40 |  default  |  10.40.40.2/24  |  -  |  10.40.40.1  |  -  |  -  |  -  |
-| Vlan4093 |  default  |  10.1.1.0/31  |  -  |  -  |  -  |  -  |  -  |
-| Vlan4094 |  default  |  10.0.0.0/31  |  -  |  -  |  -  |  -  |  -  |
+| Vlan4093 |  default  |  10.2.2.0/31  |  -  |  -  |  -  |  -  |  -  |
+| Vlan4094 |  default  |  10.2.1.0/31  |  -  |  -  |  -  |  -  |  -  |
 
 ### VLAN Interfaces Device Configuration
 
@@ -426,7 +426,7 @@ interface Vlan4093
    description MLAG_PEER_L3_PEERING
    no shutdown
    mtu 1500
-   ip address 10.1.1.0/31
+   ip address 10.2.2.0/31
    ip ospf network point-to-point
    ip ospf area 0.0.0.0
 !
@@ -435,7 +435,7 @@ interface Vlan4094
    no shutdown
    mtu 1500
    no autostate
-   ip address 10.0.0.0/31
+   ip address 10.2.1.0/31
 ```
 
 # Routing
@@ -506,7 +506,7 @@ ip route 0.0.0.0/0 192.168.0.1
 
 | Process ID | Router ID | Default Passive Interface | No Passive Interface | BFD | Max LSA | Default Information Originate | Log Adjacency Changes Detail | Auto Cost Reference Bandwidth | Maximum Paths | MPLS LDP Sync Default | Distribute List In |
 | ---------- | --------- | ------------------------- | -------------------- | --- | ------- | ----------------------------- | ---------------------------- | ----------------------------- | ------------- | --------------------- | ------------------ |
-| 100 | 1.1.1.1 | enabled | Vlan4093 <br> Ethernet7 <br> Ethernet8 <br> | disabled | 12000 | disabled | disabled | - | - | - | - |
+| 100 | 2.2.2.1 | enabled | Vlan4093 <br> Ethernet7 <br> Ethernet8 <br> | disabled | 12000 | disabled | disabled | - | - | - | - |
 
 ### Router OSPF Router Redistribution
 
@@ -528,7 +528,7 @@ ip route 0.0.0.0/0 192.168.0.1
 ```eos
 !
 router ospf 100
-   router-id 1.1.1.1
+   router-id 2.2.2.1
    passive-interface default
    no passive-interface Vlan4093
    no passive-interface Ethernet7
