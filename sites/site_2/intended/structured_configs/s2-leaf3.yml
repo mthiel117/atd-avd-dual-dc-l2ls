@@ -52,7 +52,7 @@ vlan_interfaces:
     shutdown: false
     ip_address: 10.0.0.8/31
     no_autostate: true
-    mtu: 9000
+    mtu: 1500
 port_channel_interfaces:
   Port-Channel1:
     description: MLAG_PEER_s2-leaf4_Po1
