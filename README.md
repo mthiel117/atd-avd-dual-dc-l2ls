@@ -43,6 +43,14 @@ Push pre-defined configs for WAN Nodes
 make prepwan
 ```
 
+## Update Passwords & SSH in Data Models
+
+>Note: Needs work to make this easier...  Eliminate the need to manually gen sha512 password and populate Lab password across multiple files...
+
+- sites/site_2/group_vars/SITE2.yml
+- sites/site_2/group_vars/SITE2.yml
+- global_vars/global_dc_vars.yml
+
 ## Build Site Configs
 
 ``` bash
