@@ -1,6 +1,6 @@
 ---
 - name: Deploy Switch configuration
-  hosts: SITE1_FABRIC
+  hosts: "{{ target_hosts }}"
   gather_facts: false
   tasks:
 
