@@ -49,6 +49,7 @@ make prepwan
 
 - sites/site_2/group_vars/SITE2.yml
 - sites/site_2/group_vars/SITE2.yml
+- wan_configs/group_vars/WAN.yml
 - global_vars/global_dc_vars.yml
 
 ## Build Site Configs
