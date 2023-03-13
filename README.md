@@ -14,6 +14,9 @@ Site 2
 
 ![ATD L2LS Topo](images/atd-avd-dual-dc-l2ls-topo.png)
 
+## Create ATD Lab
+
+Create a new ATD Dual Center Lab and then follow along
 ## Clone this repo to ATD Programmability IDE
 
 ``` bash
@@ -70,4 +73,18 @@ make deploy-site-1
 
 # Build Site 2 Configs
 make deploy-site-2
+```
+
+# Test Traffic
+
+Log on to a a spine a look at OSPF neighbors and ip routes.  Ping across to the the side.
+
+From s1-spine1
+
+``` bash
+show ip ospf neighbors
+
+show ip route
+
+ping 10.30.30.1
 ```
