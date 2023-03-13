@@ -32,6 +32,7 @@
   - [IP Routing](#ip-routing)
   - [IPv6 Routing](#ipv6-routing)
   - [Static Routes](#static-routes)
+  - [Router OSPF](#router-ospf)
 - [Multicast](#multicast)
   - [IP IGMP Snooping](#ip-igmp-snooping)
 - [Filters](#filters)
@@ -255,6 +256,13 @@ vlan 4094
 
 *Inherited from Port-Channel Interface
 
+#### IPv4
+
+| Interface | Description | Type | Channel Group | IP Address | VRF |  MTU | Shutdown | ACL In | ACL Out |
+| --------- | ----------- | -----| ------------- | ---------- | ----| ---- | -------- | ------ | ------- |
+| Ethernet7 | P2P_LINK_TO_WANCORE_Ethernet2 | routed | - | 10.0.0.29/31 | default | 1500 | False | - | - |
+| Ethernet8 | P2P_LINK_TO_WANCORE_Ethernet2 | routed | - | 10.0.0.33/31 | default | 1500 | False | - | - |
+
 ### Ethernet Interfaces Device Configuration
 
 ```eos
@@ -288,6 +296,24 @@ interface Ethernet6
    description MLAG_PEER_s1-spine2_Ethernet6
    no shutdown
    channel-group 1 mode active
+!
+interface Ethernet7
+   description P2P_LINK_TO_WANCORE_Ethernet2
+   no shutdown
+   mtu 1500
+   no switchport
+   ip address 10.0.0.29/31
+   ip ospf network point-to-point
+   ip ospf area 0.0.0.0
+!
+interface Ethernet8
+   description P2P_LINK_TO_WANCORE_Ethernet2
+   no shutdown
+   mtu 1500
+   no switchport
+   ip address 10.0.0.33/31
+   ip ospf network point-to-point
+   ip ospf area 0.0.0.0
 ```
 
 ## Port-Channel Interfaces
@@ -357,6 +383,7 @@ interface Loopback0
    description Router_ID
    no shutdown
    ip address 1.1.1.1/32
+   ip ospf area 0.0.0.0
 ```
 
 ## VLAN Interfaces
@@ -367,8 +394,8 @@ interface Loopback0
 | --------- | ----------- | --- | ---- | -------- |
 | Vlan10 | Ten | default | - | False |
 | Vlan20 | Twenty | default | - | False |
-| Vlan4093 | MLAG_PEER_L3_PEERING | default | 9000 | False |
-| Vlan4094 | MLAG_PEER | default | 9000 | False |
+| Vlan4093 | MLAG_PEER_L3_PEERING | default | 1500 | False |
+| Vlan4094 | MLAG_PEER | default | 1500 | False |
 
 #### IPv4
 
@@ -398,13 +425,15 @@ interface Vlan20
 interface Vlan4093
    description MLAG_PEER_L3_PEERING
    no shutdown
-   mtu 9000
+   mtu 1500
    ip address 10.1.1.0/31
+   ip ospf network point-to-point
+   ip ospf area 0.0.0.0
 !
 interface Vlan4094
    description MLAG_PEER
    no shutdown
-   mtu 9000
+   mtu 1500
    no autostate
    ip address 10.0.0.0/31
 ```
@@ -469,6 +498,43 @@ ip routing
 ```eos
 !
 ip route 0.0.0.0/0 192.168.0.1
+```
+
+## Router OSPF
+
+### Router OSPF Summary
+
+| Process ID | Router ID | Default Passive Interface | No Passive Interface | BFD | Max LSA | Default Information Originate | Log Adjacency Changes Detail | Auto Cost Reference Bandwidth | Maximum Paths | MPLS LDP Sync Default | Distribute List In |
+| ---------- | --------- | ------------------------- | -------------------- | --- | ------- | ----------------------------- | ---------------------------- | ----------------------------- | ------------- | --------------------- | ------------------ |
+| 100 | 1.1.1.1 | enabled | Vlan4093 <br> Ethernet7 <br> Ethernet8 <br> | disabled | 12000 | disabled | disabled | - | - | - | - |
+
+### Router OSPF Router Redistribution
+
+| Process ID | Source Protocol | Route Map |
+| ---------- | --------------- | --------- |
+| 100 | connected | - |
+
+### OSPF Interfaces
+
+| Interface | Area | Cost | Point To Point |
+| -------- | -------- | -------- | -------- |
+| Ethernet7 | 0.0.0.0 | - | True |
+| Ethernet8 | 0.0.0.0 | - | True |
+| Vlan4093 | 0.0.0.0 | - | True |
+| Loopback0 | 0.0.0.0 | - | - |
+
+### Router OSPF Device Configuration
+
+```eos
+!
+router ospf 100
+   router-id 1.1.1.1
+   passive-interface default
+   no passive-interface Vlan4093
+   no passive-interface Ethernet7
+   no passive-interface Ethernet8
+   max-lsa 12000
+   redistribute connected
 ```
 
 # Multicast

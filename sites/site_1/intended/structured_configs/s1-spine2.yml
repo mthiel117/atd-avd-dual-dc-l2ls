@@ -58,14 +58,16 @@ vlan_interfaces:
   Vlan4093:
     description: MLAG_PEER_L3_PEERING
     shutdown: false
-    mtu: 9000
+    mtu: 1500
     ip_address: 10.1.1.1/31
+    ospf_network_point_to_point: true
+    ospf_area: 0.0.0.0
   Vlan4094:
     description: MLAG_PEER
     shutdown: false
     ip_address: 10.0.0.1/31
     no_autostate: true
-    mtu: 9000
+    mtu: 1500
   Vlan10:
     tenant: MY_FABRIC
     tags:
@@ -169,6 +171,28 @@ ethernet_interfaces:
     channel_group:
       id: 4
       mode: active
+  Ethernet7:
+    peer: WANCORE
+    peer_interface: Ethernet2
+    peer_type: other
+    description: P2P_LINK_TO_WANCORE_Ethernet2
+    type: routed
+    shutdown: false
+    mtu: 1500
+    ip_address: 10.0.0.31/31
+    ospf_network_point_to_point: true
+    ospf_area: 0.0.0.0
+  Ethernet8:
+    peer: WANCORE
+    peer_interface: Ethernet2
+    peer_type: other
+    description: P2P_LINK_TO_WANCORE_Ethernet2
+    type: routed
+    shutdown: false
+    mtu: 1500
+    ip_address: 10.0.0.35/31
+    ospf_network_point_to_point: true
+    ospf_area: 0.0.0.0
 mlag_configuration:
   domain_id: SPINES
   local_interface: Vlan4094
@@ -181,6 +205,20 @@ loopback_interfaces:
     description: Router_ID
     shutdown: false
     ip_address: 1.1.1.2/32
+    ospf_area: 0.0.0.0
+router_ospf:
+  process_ids:
+    100:
+      passive_interface_default: true
+      router_id: 1.1.1.2
+      max_lsa: 12000
+      no_passive_interfaces:
+      - Vlan4093
+      - Ethernet7
+      - Ethernet8
+      bfd_enable: false
+      redistribute:
+        connected: {}
 ip_igmp_snooping:
   globally_enabled: true
 ip_virtual_router_mac_address: aa:aa:bb:bb:cc:cc

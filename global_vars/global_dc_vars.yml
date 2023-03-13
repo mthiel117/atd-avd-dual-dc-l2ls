@@ -68,3 +68,6 @@ dns_domain: atd.lab
 #   ingestexclude: /Sysdb/cell/1/agent,/Sysdb/cell/2/agent
 #   # Exclude paths from the shared memory table
 #   smashexcludes: ale,flexCounter,hardware,kni,pulse,strata
+
+# Point to Point Links MTU Override for Lab
+p2p_uplinks_mtu: 1500

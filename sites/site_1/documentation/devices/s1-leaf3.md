@@ -305,7 +305,7 @@ interface Port-Channel2
 
 | Interface | Description | VRF |  MTU | Shutdown |
 | --------- | ----------- | --- | ---- | -------- |
-| Vlan4094 | MLAG_PEER | default | 9000 | False |
+| Vlan4094 | MLAG_PEER | default | 1500 | False |
 
 #### IPv4
 
@@ -320,7 +320,7 @@ interface Port-Channel2
 interface Vlan4094
    description MLAG_PEER
    no shutdown
-   mtu 9000
+   mtu 1500
    no autostate
    ip address 10.0.0.8/31
 ```
