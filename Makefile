@@ -19,7 +19,7 @@ deploy-site-1: ## Deploy Configs via eAPI
 	ansible-playbook playbooks/deploy.yml -i sites/site_1/inventory.yml -e "target_hosts=SITE1_FABRIC"
 
 ########################################################
-# Site 1
+# Site 2
 ########################################################
 
 .PHONY: ping-site-2
@@ -33,3 +33,15 @@ build-site-2: ## Build Configs
 .PHONY: deploy-site-2
 deploy-site-2: ## Deploy Configs via eAPI
 	ansible-playbook playbooks/deploy.yml -i sites/site_2/inventory.yml -e "target_hosts=SITE2_FABRIC"
+
+########################################################
+# WAN - Lab Prep
+########################################################
+
+.PHONY: prepwan
+prepwan: ## Deploy Configs via eAPI
+	ansible-playbook playbooks/prepwan.yml -i wan_configs/inventory.yml -e "target_hosts=WAN"
+
+.PHONY: ping-wan
+ping-wan: ## Deploy Configs via eAPI
+	ansible-playbook playbooks/ping.yml -i wan_configs/inventory.yml -e "target_hosts=WAN"
