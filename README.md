@@ -14,6 +14,27 @@ Site 2
 
 ![ATD L2LS Topo](images/atd-avd-dual-dc-l2ls-topo.png)
 
+## Clone this repo to ATD Programmability IDE
+
+``` bash
+cd /home/coder/project/labfiles
+git clone https://github.com/mthiel117/atd-avd-dual-dc-l2ls.git
+```
+
+## ATD Lab Updates
+
+Update AVD to latest version
+
+``` bash
+ansible-galaxy collection install arista.avd --force
+```
+
+Install Deepmerge module
+
+``` bash
+pip install deepmerge
+```
+
 ## Initialize WAN environment
 
 Push pre-defined configs for WAN Nodes
